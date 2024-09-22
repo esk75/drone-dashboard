@@ -40,12 +40,12 @@ const DroneDashboard = () => {
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Tableau de bord des attaques de drones en Éthiopie</h1>
+      <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Dashboard of Drone Attacks in Ethiopia</h1>
       
       <div style={{ marginBottom: '20px' }}>
-        <label htmlFor="regionFilter">Filtrer par région: </label>
+        <label htmlFor="regionFilter">Filter by region: </label>
         <select id="regionFilter" value={filter} onChange={(e) => setFilter(e.target.value)} style={{ marginRight: '10px' }}>
-          <option value="All">Toutes les régions</option>
+          <option value="All">All regions</option>
           <option value="Amhara">Amhara</option>
           <option value="Oromia">Oromia</option>
         </select>
@@ -53,26 +53,26 @@ const DroneDashboard = () => {
 
       <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
         <div style={{ textAlign: 'center', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}>
-          <h3>Total des victimes</h3>
+          <h3>Total casualties</h3>
           <p style={{ fontSize: '24px', fontWeight: 'bold' }}>{totalKilled}</p>
         </div>
         <div style={{ textAlign: 'center', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}>
-          <h3>Total des blessés</h3>
+          <h3>Total injured</h3>
           <p style={{ fontSize: '24px', fontWeight: 'bold' }}>{totalInjured}</p>
         </div>
         <div style={{ textAlign: 'center', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}>
-          <h3>Moyenne des victimes par incident</h3>
+          <h3>Average casualties per incident</h3>
           <p style={{ fontSize: '24px', fontWeight: 'bold' }}>{averageKilled}</p>
         </div>
         <div style={{ textAlign: 'center', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}>
-          <h3>Nombre d'incidents</h3>
+          <h3>Number of incidents</h3>
           <p style={{ fontSize: '24px', fontWeight: 'bold' }}>{filteredData.length}</p>
         </div>
       </div>
 
       <div style={{ display: 'flex', marginBottom: '20px' }}>
         <div style={{ flex: 2, border: '1px solid #ddd', borderRadius: '5px', padding: '10px', marginRight: '10px' }}>
-          <h2 style={{ textAlign: 'center' }}>Évolution des victimes au fil du temps</h2>
+          <h2 style={{ textAlign: 'center' }}>Casualties over time</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={filteredData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -80,13 +80,13 @@ const DroneDashboard = () => {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="killed" stroke="#8884d8" name="Tués" activeDot={{ onClick: (_, index) => setSelectedPoint(filteredData[index]) }} />
-              <Line type="monotone" dataKey="injured" stroke="#82ca9d" name="Blessés" />
+              <Line type="monotone" dataKey="killed" stroke="#8884d8" name="Killed" activeDot={{ onClick: (_, index) => setSelectedPoint(filteredData[index]) }} />
+              <Line type="monotone" dataKey="injured" stroke="#82ca9d" name="Injured" />
             </LineChart>
           </ResponsiveContainer>
         </div>
         <div style={{ flex: 1, border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
-          <h2 style={{ textAlign: 'center' }}>Répartition par région</h2>
+          <h2 style={{ textAlign: 'center' }}>Distribution by region</h2>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie data={regionData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} fill="#8884d8" label>
@@ -101,7 +101,7 @@ const DroneDashboard = () => {
       </div>
 
       <div style={{ marginBottom: '20px', border: '1px solid #ddd', borderRadius: '5px', padding: '10px' }}>
-        <h2 style={{ textAlign: 'center' }}>Victimes par incident</h2>
+        <h2 style={{ textAlign: 'center' }}>Casualties per incident</h2>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={filteredData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -109,34 +109,34 @@ const DroneDashboard = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="killed" fill="#8884d8" name="Tués" />
-            <Bar dataKey="injured" fill="#82ca9d" name="Blessés" />
+            <Bar dataKey="killed" fill="#8884d8" name="Killed" />
+            <Bar dataKey="injured" fill="#82ca9d" name="Injured" />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       {selectedPoint && (
         <div style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ddd', borderRadius: '5px', backgroundColor: '#f9f9f9' }}>
-          <h3>Détails de l'incident sélectionné</h3>
+          <h3>Selected Incident Details</h3>
           <p>Date: {selectedPoint.date}</p>
-          <p>Lieu: {selectedPoint.location}</p>
-          <p>Région: {selectedPoint.region}</p>
-          <p>Nombre de tués: {selectedPoint.killed}</p>
-          <p>Nombre de blessés: {selectedPoint.injured}</p>
-          <p>Source: <a href={selectedPoint.source} target="_blank" rel="noopener noreferrer">Lien vers l'article</a></p>
+          <p>Location: {selectedPoint.location}</p>
+          <p>Region: {selectedPoint.region}</p>
+          <p>Number of killed: {selectedPoint.killed}</p>
+          <p>Number of injured: {selectedPoint.injured}</p>
+          <p>Source: <a href={selectedPoint.source} target="_blank" rel="noopener noreferrer">Link to article</a></p>
         </div>
       )}
 
       <div style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '10px', overflowX: 'auto' }}>
-        <h2 style={{ textAlign: 'center' }}>Détails des incidents</h2>
+        <h2 style={{ textAlign: 'center' }}>Incident details</h2>
         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ backgroundColor: '#f2f2f2' }}>
               <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Date</th>
-              <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Lieu</th>
-              <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Région</th>
-              <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Tués</th>
-              <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Blessés</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Location</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Region</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Killed</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Injured</th>
               <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Source</th>
             </tr>
           </thead>
@@ -149,7 +149,7 @@ const DroneDashboard = () => {
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.killed}</td>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>{item.injured}</td>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>
-                  <a href={item.source} target="_blank" rel="noopener noreferrer">Lien vers l'article</a>
+                  <a href={item.source} target="_blank" rel="noopener noreferrer">Link to article</a>
                 </td>
               </tr>
             ))}
