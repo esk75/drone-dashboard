@@ -2,7 +2,11 @@ import React, { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts';
 
 const data = [
+const data = [
+  // Existing data from 2023
+  { date: '2023-06-15', killed: 40, injured: 0, location: 'Wadera, Guji', region: 'Oromia', source: 'https://www.thenewhumanitarian.org/feature/2024/03/05/horrific-civilian-toll-ethiopia-combat-drones-local-insurgencies' },
   { date: '2023-08-04', killed: 8, injured: 0, location: 'Finote Selam, West Gojjam', region: 'Amhara', source: 'https://www.amharaamerica.org/_files/ugd/e494ca_6dc816df63bd43c5a98dddf9953819f2.pdf' },
+  { date: '2023-08-09', killed: 15, injured: 0, location: 'Shewa Robit, North Shewa', region: 'Amhara', source: 'https://www.thenewhumanitarian.org/feature/2024/03/05/horrific-civilian-toll-ethiopia-combat-drones-local-insurgencies' },
   { date: '2023-08-14', killed: 26, injured: 15, location: 'Finote Selam, West Gojjam', region: 'Amhara', source: 'https://www.lemonde.fr/en/international/article/2023/08/15/air-strike-kills-at-least-26-in-ethiopia-s-amhara_6093248_4.html' },
   { date: '2023-09-17', killed: 30, injured: 0, location: 'Adet, West Gojjam', region: 'Amhara', source: 'https://www.bbc.com/amharic/articles/cv21y38zy71o' },
   { date: '2023-09-17', killed: 18, injured: 0, location: 'Dembecha, West Gojjam', region: 'Amhara', source: 'https://www.bbc.com/amharic/articles/cv21y38zy71o' },
@@ -13,6 +17,12 @@ const data = [
   { date: '2023-11-04', killed: 11, injured: 0, location: 'Debre Tabor, South Gondar', region: 'Amhara', source: 'https://www.amharaamerica.org/_files/ugd/e494ca_6dc816df63bd43c5a98dddf9953819f2.pdf' },
   { date: '2023-11-09', killed: 12, injured: 0, location: 'Nefas Mewcha, South Gondar', region: 'Amhara', source: 'https://www.amharaamerica.org/_files/ugd/e494ca_6dc816df63bd43c5a98dddf9953819f2.pdf' },
   { date: '2023-12-10', killed: 80, injured: 0, location: 'Merawi, West Gojjam', region: 'Amhara', source: 'https://www.amharaamerica.org/_files/ugd/e494ca_6dc816df63bd43c5a98dddf9953819f2.pdf' },
+  
+  // New data from 2024
+  { date: '2024-01-29', killed: 45, injured: 0, location: 'Merawi, West Gojjam', region: 'Amhara', source: 'https://www.theguardian.com/global-development/2024/feb/12/dozens-of-civilians-killed-by-ethiopian-state-troops-in-amhara-region-say-reports' },
+  { date: '2024-03-01', killed: 22, injured: 30, location: 'Debre Markos', region: 'Amhara', source: 'https://www.hrw.org/news/2024/04/04/ethiopia-military-executes-dozens-amhara-region' },
+  { date: '2024-03-15', killed: 15, injured: 0, location: 'Bahir Dar', region: 'Amhara', source: 'https://www.aljazeera.com/news/2024/4/4/ethiopias-army-accused-of-committing-war-crimes-in-amhara-region' },
+  { date: '2024-04-02', killed: 30, injured: 50, location: 'Gondar', region: 'Amhara', source: 'https://www.aljazeera.com/news/2024/4/4/ethiopias-army-accused-of-committing-war-crimes-in-amhara-region' },
 ];
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82ca9d'];
